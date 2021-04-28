@@ -1,0 +1,2 @@
+# RaceAAA
+RaceAAA is a race/event management system. In the project, JavaScript and bootstrap4 were used for client-side programming; On the server-side, we used flask-sqlalchemy and mysql-connector-python for database programming. In both runner and event search, in order to avoid the SQL injection and implement a Google-like searching, we use Python Regular Expression API to split user’s input content to alphabet and number only words, and use SQL Regular Expression operator with the predefined pattern to find out the matching records.
