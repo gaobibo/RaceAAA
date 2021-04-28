@@ -9,8 +9,10 @@ RaceAAA is a race/event management system. In the project, JavaScript and bootst
 # Site Map
 ![image](https://user-images.githubusercontent.com/60306897/116333050-72ee0080-a798-11eb-8106-984169e02067.png)
 
-# UI(PART)
+# UI (Partial)
 ![image](https://user-images.githubusercontent.com/60306897/116333139-99ac3700-a798-11eb-9f1b-3859c84961a3.png)
+
 ![image](https://user-images.githubusercontent.com/60306897/116333158-a0d34500-a798-11eb-8690-b536341cd9db.png)
+
 ![image](https://user-images.githubusercontent.com/60306897/116333370-f0197580-a798-11eb-8c42-828bb84ca338.png)
 
