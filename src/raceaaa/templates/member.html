@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img id="picture_image" class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+            <h2 class="account-heading">
+                {% if member is not none %}
+                    <a class="article-title" href="{{ url_for('runner', memberid=member.memberid) }}">{{ member.fname }} {{ member.lname }}</a>
+                {% else %}
+                    <a class="article-title" href="#">Name</a>
+                {% endif %}
+            </h2>
+            <div class="text-secondary pull-left" style="width: 50%;">
+                Gender: {{ member.gender }}<br>
+                Age: {{ age }}<br>
+                Location: {{ member.state}} {{ member.country }}
+            </div>
+            <div class="text-secondary">
+                Rank:<br>
+                Status:<br>
+                Club: {{ member.club }}
+            </div>
+        </div>
+      </div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Member Info</legend>
+                <div class="form-row form-group">
+                    <div class="col">
+                        {{ form.field_fname.label(class="form-control-label") }}
+                        {% if form.field_fname.errors %}
+                            {{ form.field_fname(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_fname.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_fname(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_lname.label(class="form-control-label") }}
+                        {% if form.field_lname.errors %}
+                            {{ form.field_lname(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_lname.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_lname(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_club.label(class="form-control-label") }}
+                        {% if form.field_club.errors %}
+                            {{ form.field_club(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_club.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_club(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_picture.label() }}
+                        {{ form.field_picture(class="form-control-file") }}
+                        {% if form.field_picture.errors %}
+                            {% for error in form.field_picture.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-row form-group">
+                    <div class="col">
+                        {{ form.field_gender.label(class="form-control-label") }}
+                        {% if form.field_gender.errors %}
+                            {{ form.field_gender(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_gender.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_gender(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_bdate.label(class="form-control-label") }}
+                        {% if form.field_bdate.errors %}
+                            {{ form.field_bdate(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_bdate.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_bdate(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-row form-group">
+                    <div class="col">
+                        {{ form.field_phone.label(class="form-control-label") }}
+                        {% if form.field_phone.errors %}
+                            {{ form.field_phone(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_phone.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_phone(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_emergcontact.label(class="form-control-label") }}
+                        {% if form.field_emergcontact.errors %}
+                            {{ form.field_emergcontact(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_emergcontact.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_emergcontact(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.field_address.label(class="form-control-label") }}
+                    {% if form.field_address.errors %}
+                        {{ form.field_address(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.field_address.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.field_address(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-row form-group">
+                    <div class="col">
+                        {{ form.field_city.label(class="form-control-label") }}
+                        {% if form.field_city.errors %}
+                            {{ form.field_city(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_city(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_state.label(class="form-control-label") }}
+                        {% if form.field_state.errors %}
+                            {{ form.field_state(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_state.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_state(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.field_country.label(class="form-control-label") }}
+                        {% if form.field_country.errors %}
+                            {{ form.field_country(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_country.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_country(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+
+<script>
+    const picture_input = document.getElementById("field_picture");
+    let picture_image = document.getElementById("picture_image");
+    
+    picture_input.addEventListener("change", function(){
+        if (picture_input.files.length == 0)
+            return;
+        
+        picture_image.setAttribute("src", URL.createObjectURL(event.target.files[0]));
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+      <ul class="carousel-indicators">
+        {% set vars = {'foo': 0} %}
+        {% for row in outString %}
+          {% if vars.foo == 0 %}
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+          {% else %}
+            <li data-target="#demo" data-slide-to="{{ vars.foo }}"></li>
+          {% endif %}
+          {% if vars.update({'foo': vars.foo + 1}) %} {% endif %}
+        {% endfor %}
+      </ul>
+
+      <div class="carousel-inner">
+        {% for row in outString %}
+          <div class="carousel-item {% if row.eventid == first.eventid %} active {% endif %}">
+              <a href="{{ url_for('event', eventid=row.eventid) }}">
+                <img class="mx-auto d-block img-fluid img-thumbnail" src={{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='event_pics/' + row.xbanner) }}>
+              </a>
+              <div class="carousel-caption">
+                <div class="text-white" style="background-color: rgba(0,0,0, 0.3);">
+                  <strong>{{ row.name }}</strong>
+                  <p>{{ row['startdate'] }}</p>
+                </div>
+              </div>   
+          </div>
+        {% endfor %}
+      </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+{% endblock content %}

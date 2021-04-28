@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <div class="media">
+                <img class="rounded event-img" id="logo_image" src="{{ image_file }}">
+                <div class="media-body">
+                    <h2 class="account-heading">
+                        <a class="article-title" href="{{ url_for('event', eventid=event.eventid) }}">{{ event.name }}</a>
+                        <div class="pull-right">
+                            {{ event.startdate.year }}
+                        </div>
+                    </h2>
+                    <div class="text-secondary pull-left" style="width: 50%;">
+                        Start: {{ event.startdate }}<br>
+                        Registration: {{ event.regopendate }}<br>
+                        Location: 
+                            {% if event.state is not none %} {{ event.state }} {% endif %}
+                            {% if event.country is not none %} {{ event.country }} {% endif %}
+                    </div>
+                    <div class="text-secondary">
+                        Races:<br>
+                        Status:<br>
+                        Organization: {% if event.organization is not none %} {{ event.organization }} {% endif %}
+                    </div>
+                  </div>
+            </div>
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ legend }}</legend>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_name.label(class="form-control-label") }}
+                            {% if form.field_name.errors %}
+                                {{ form.field_name(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {{ form.field_distance.label(class="form-control-label") }}
+                            {% if form.field_distance.errors %}
+                                {{ form.field_distance(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_distance.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_distance(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_starttime.label(class="form-control-label") }}
+                            {% if form.field_starttime.errors %}
+                                {{ form.field_starttime(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_starttime.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_starttime(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {{ form.field_endtime.label(class="form-control-label") }}
+                            {% if form.field_endtime.errors %}
+                                {{ form.field_endtime(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_endtime.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_endtime(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_capacity.label(class="form-control-label") }}
+                            {% if form.field_capacity.errors %}
+                                {{ form.field_capacity(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_capacity.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_capacity(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {{ form.field_price.label(class="form-control-label") }}
+                            {% if form.field_price.errors %}
+                                {{ form.field_price(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_price.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_price(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form.field_description.label(class="form-control-label") }}
+                        {% if form.field_description.errors %}
+                            {{ form.field_description(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.field_description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.field_description(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</article>
+
+{% endblock content %}

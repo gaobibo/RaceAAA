@@ -1,0 +1,362 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Search Runner</h5>
+            
+            <div class="input-group mb-3">
+                <input id="ri1" type="text" class="form-control" placeholder="" autocomplete="off">
+                <div class="input-group-append">
+                    <button id="search-runner-button" onclick="GetResults()" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+
+            <h5>Filter Result</h5><hr>
+            <div>
+                <h5>Gender</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rg1" onclick="GetResults()" autocomplete="off"/> Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rg2" onclick="GetResults()" autocomplete="off"/> Female
+                        </label>
+                    </div>
+                </div>
+                
+                <h5>Age</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra1" onclick="GetResults()" autocomplete="off"/> Up to 19
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra2" onclick="GetResults()" autocomplete="off"/> 20 - 29
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra3" onclick="GetResults()" autocomplete="off"/> 30 - 39
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra4" onclick="GetResults()" autocomplete="off"/> 40 - 49
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra5" onclick="GetResults()" autocomplete="off"/> 50 - 59
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra6" onclick="GetResults()" autocomplete="off"/> 60 - 69
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ra7" onclick="GetResults()" autocomplete="off"/> 70+
+                        </label>
+                    </div>
+                </div>
+
+                <h5>History</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rh1" onclick="GetResults()" autocomplete="off"/> More Than 50 Races
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rh2" onclick="GetResults()" autocomplete="off"/> 21-50 Races
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rh3" onclick="GetResults()" autocomplete="off"/> 6 - 20 Races
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rh4" onclick="GetResults()" autocomplete="off"/> 1 - 5 Races
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rh5" onclick="GetResults()" autocomplete="off"/> Zero Races
+                        </label>
+                    </div>
+                </div>
+
+                <h5>Last Event</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rl1" onclick="GetResults()" autocomplete="off"/> Within 1 year
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rl2" onclick="GetResults()" autocomplete="off"/> Within 3 years
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rl3" onclick="GetResults()" autocomplete="off"/> Within 5 years
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rl4" onclick="GetResults()" autocomplete="off"/> More Than 5 years
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="rl5" onclick="GetResults()" autocomplete="off"/> Not Available
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--
+        <div class="col-md-8" id="runner_list">
+            {% for row in outString %}
+                <div class="card pull-left" style="margin-left:10px; margin-top:10px; width:200px; height: 350px;">
+                    <a href="{{ url_for('runner', memberid=row.memberid) }}">
+                        <img class="card-img-top" src="{{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='profile_pics/' + row.pic) }}" style="width:100%">
+                    </a>
+                    <div class="card-body">
+                        <a href="{{ url_for('runner', memberid=row.memberid) }}">
+                            <h6 class="card-title">{{ row.fname + ' ' + row.lname }}</h6>
+                        </a>
+                        <p class="card-text">
+                            {% if row.age: %}
+                                Age: {{ row.age }} <br>
+                            {% else: %}
+                                Age: NA <br>
+                            {% endif %}
+
+                            {% if row.gender: %}
+                                Gender: {{ row.gender }} <br>
+                            {% else: %}
+                                Gender: NA <br>
+                            {% endif %}
+
+                            {% if row.country: %}
+                                Country: {{ row.country }} <br>
+                            {% else: %}
+                                Country: NA <br>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+-->
+<!--
+        <div class="col-md-8" id="runner_list">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in outString %}
+                    <tr>
+                        <td>
+                            <img class="rounded-circle account-img-sm" src="{{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='profile_pics/' + row.pic) }}"/>
+                            <a href="{{ url_for('runner', memberid=row.memberid) }}">{{ row.fname + ' ' + row.lname }}</a>
+                        </td>
+                        {% if row.age: %}
+                            <td>{{ row.age }}</td>
+                        {% endif %}
+
+                        {% if row.gender: %}
+                            <td>{{ row.gender }}</td>
+                        {% endif %}
+
+                        {% if row.country: %}
+                            <td>{{ row.country }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+-->
+        <div class="col-md-8" id="runner_list">
+            {% for member in outString %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <div class="media">
+                            <img class="rounded-circle account-img" src="{{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='profile_pics/' + member.pic) }}">
+                            <div class="media-body">
+                                <h2 class="account-heading">
+                                    <a class="article-title" href="{{ url_for('runner', memberid=member.memberid) }}">{{ member.fname }} {{ member.lname }}</a>
+                                </h2>
+                                <div class="text-secondary pull-left" style="width: 50%;">
+                                    Gender: {{ member.gender }} <br>
+                                    Age: {{ member.age }} <br>
+                                    Location: 
+                                        {% if member.state is not none %} {{ member.state }} {% endif %}
+                                        {% if member.country is not none %} {{ member.country }} {% endif %}
+                                </div>
+                                <div class="text-secondary">
+                                    Rank: <br>
+                                    Status: <br>
+                                    Club: {% if member.club is not none %} {{ member.club }} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    var ri1 = document.getElementById('ri1');
+    var rg1 = document.getElementById("rg1");
+    var rg2 = document.getElementById("rg2");
+    var ra1 = document.getElementById("ra1");
+    var ra2 = document.getElementById("ra2");
+    var ra3 = document.getElementById("ra3");
+    var ra4 = document.getElementById("ra4");
+    var ra5 = document.getElementById("ra5");
+    var ra6 = document.getElementById("ra6");
+    var ra7 = document.getElementById("ra7");
+    var rh1 = document.getElementById("rh1");
+    var rh2 = document.getElementById("rh2");
+    var rh3 = document.getElementById("rh3");
+    var rh4 = document.getElementById("rh4");
+    var rh5 = document.getElementById("rh5");
+    var rl1 = document.getElementById("rl1");
+    var rl2 = document.getElementById("rl2");
+    var rl3 = document.getElementById("rl3");
+    var rl4 = document.getElementById("rl4");
+    var rl5 = document.getElementById("rl5");
+
+    var queryDict = {};
+    location.search.substr(1).split("&").forEach(function(item){queryDict[item.split("=")[0]]=item.split("=")[1]});
+
+    ri1.value = queryDict.name ? decodeURIComponent(queryDict.name) : '';
+    if (queryDict.focus == 1) ri1.focus();
+    rg1.checked = queryDict.sex  & 0x0001 ? true : false;
+    rg2.checked = queryDict.sex  & 0x0002 ? true : false;
+    ra1.checked = queryDict.age  & 0x0001 ? true : false;
+    ra2.checked = queryDict.age  & 0x0002 ? true : false;
+    ra3.checked = queryDict.age  & 0x0004 ? true : false;
+    ra4.checked = queryDict.age  & 0x0008 ? true : false;
+    ra5.checked = queryDict.age  & 0x0010 ? true : false;
+    ra6.checked = queryDict.age  & 0x0020 ? true : false;
+    ra7.checked = queryDict.age  & 0x0040 ? true : false;
+    rh1.checked = queryDict.hist & 0x0001 ? true : false;
+    rh2.checked = queryDict.hist & 0x0002 ? true : false;
+    rh3.checked = queryDict.hist & 0x0004 ? true : false;
+    rh4.checked = queryDict.hist & 0x0008 ? true : false;
+    rh5.checked = queryDict.hist & 0x0010 ? true : false;
+    rl1.checked = queryDict.last & 0x0001 ? true : false;
+    rl2.checked = queryDict.last & 0x0002 ? true : false;
+    rl3.checked = queryDict.last & 0x0004 ? true : false;
+    rl4.checked = queryDict.last & 0x0008 ? true : false;
+    rl5.checked = queryDict.last & 0x0010 ? true : false;
+
+    var focus = false;
+    ri1.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            focus = true;
+            document.getElementById('search-runner-button').click();
+        }
+    });
+
+    function GetResults(){
+        var sex  = 0;
+        var age  = 0;
+        var hist = 0;
+        var last = 0;
+
+        if (rg1.checked) sex |= 0x0001;
+        if (rg2.checked) sex |= 0x0002;
+        if (ra1.checked) age |= 0x0001;
+        if (ra2.checked) age |= 0x0002;
+        if (ra3.checked) age |= 0x0004;
+        if (ra4.checked) age |= 0x0008;
+        if (ra5.checked) age |= 0x0010;
+        if (ra6.checked) age |= 0x0020;
+        if (ra7.checked) age |= 0x0040;
+        if (rh1.checked) hist |= 0x0001;
+        if (rh2.checked) hist |= 0x0002;
+        if (rh3.checked) hist |= 0x0004;
+        if (rh4.checked) hist |= 0x0008;
+        if (rh5.checked) hist |= 0x0010;
+        if (rl1.checked) last |= 0x0001;
+        if (rl2.checked) last |= 0x0002;
+        if (rl3.checked) last |= 0x0004;
+        if (rl4.checked) last |= 0x0008;
+        if (rl5.checked) last |= 0x0010;
+
+        url = '/search_runner?';
+        url += 'name=' + encodeURIComponent(ri1.value);
+        if (focus) url += '&focus=1';
+        if (sex  > 0) url += '&sex='  + sex;
+        if (age  > 0) url += '&age='  + age;
+        if (hist > 0) url += '&hist=' + hist;
+        if (last > 0) url += '&last=' + last;
+        
+        window.location.assign(url);
+    }
+
+    function GetNameResults(){
+        url = '/search_runner/';
+        url += encodeURIComponent(ri1.value);
+        
+        fetch(url).then(function(response) {
+                response.json().then(function(data) {
+                    let runnerHTML = '';
+                    for (let runner of data.runners) {
+                        runnerHTML += '<article class="media content-section">' +
+                                        '<div class="media-body">' +
+                                        '<div class="media">' +
+                                        '<img class="rounded-circle account-img" src="static/profile_pics/' + runner.pic + '">' +
+                                        '<div class="media-body">' +
+                                        '<h2 class="account-heading">' +
+                                            '<a class="article-title" href="runner/' + runner.memberid + '">' + runner.name + '</a>' +
+                                        '</h2>' +
+                                        '<div class="text-secondary pull-left" style="width: 50%;">' +
+                                            'Gender: ' + runner.gender + '<br>' +
+                                            'Age: ' + runner.age + '<br>' +
+                                            'Location: ' + runner.location + '<br>' +
+                                        '</div>' +
+                                        '<div class="text-secondary">' +
+                                            'Rank: ' + '<br>' +
+                                            'Status: ' + '<br>' +
+                                            'Club: ' + runner.club +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</article>';
+                    }
+                    let runner_list = document.getElementById('runner_list');
+                    runner_list.innerHTML = runnerHTML;
+                });
+            });
+    }
+</script>
+
+{% endblock content %}

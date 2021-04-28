@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <div class="media">
+                <img class="rounded event-img" id="logo_image" src="{{ image_file }}">
+                <div class="media-body">
+                    <h2 class="account-heading">
+                        <a class="article-title" href="{{ url_for('event', eventid=event.eventid) }}">{{ event.name }}</a>
+                        <div class="pull-right">
+                            {{ event.startdate.year }}
+                        </div>
+                    </h2>
+                    <div class="text-secondary pull-left" style="width: 50%;">
+                        Start: {{ event.startdate }}<br>
+                        Registration: {{ event.regopendate }}<br>
+                        Location: 
+                            {% if event.state is not none %} {{ event.state }} {% endif %}
+                            {% if event.country is not none %} {{ event.country }} {% endif %}
+                    </div>
+                    <div class="text-secondary">
+                        Races:<br>
+                        Status:<br>
+                        Organization: {% if event.organization is not none %} {{ event.organization }} {% endif %}
+                    </div>
+                  </div>
+            </div>
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">{{ legend }}</legend>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_raceid.label(class="form-control-label") }}
+                            {% if form.field_raceid.errors %}
+                                {{ form.field_raceid(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_raceid.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_raceid(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_plannedhour.label(class="form-control-label") }}
+                            {% if form.field_plannedhour.errors %}
+                                {{ form.field_plannedhour(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_plannedhour.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_plannedhour(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {{ form.field_plannedminute.label(class="form-control-label") }}
+                            {% if form.field_plannedminute.errors %}
+                                {{ form.field_plannedminute(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_plannedminute.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_plannedminute(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="form-row form-group">
+                        <div class="col">
+                            {{ form.field_tshirtsize.label(class="form-control-label") }}
+                            {% if form.field_tshirtsize.errors %}
+                                {{ form.field_tshirtsize(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.field_tshirtsize.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.field_tshirtsize(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</article>
+
+{% endblock content %}

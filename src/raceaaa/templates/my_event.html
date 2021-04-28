@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ image_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">
+              <a class="article-title" href="{{ url_for('runner', memberid=member.memberid) }}">{{ member.fname }} {{ member.lname }}</a>
+          </h2>
+          <div class="text-secondary pull-left" style="width: 50%;">
+              Gender: {{ member.gender }}<br>
+              Age: {{ age }}<br>
+              Location: {{ member.state}} {{ member.country }}
+          </div>
+          <div class="text-secondary">
+              Rank:<br>
+              Status:<br>
+              Club: {{ member.club }}<br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#joined-events">Registered Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#volunteered-events">Volunteered Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#hosted-events">Hosted Events</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="joined-events" class="container tab-pane active"><br>
+          <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Race</th>
+                        <th>Finished Time</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in participated_events %}
+                    <tr>
+                        <td><a href="{{ url_for('event', eventid=row.eventid) }}">{{ row.name }}</a></td>
+                        <td>{{ row.rname }}</td>
+                        <td>{% if row.finishedtime is not none %} {{ row.finishedtime }} {% endif %}</td>
+                        <td>{{ row.startdate }}</td>
+                        <td>
+                          {% if row.state is not none %} {{ row.state }} {% endif %}
+                          {% if row.country is not none %} {{ row.country }} {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="volunteered-events" class="container tab-pane fade"><br>
+          <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Job</th>
+                        <th>Applied Time</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in volunteered_events %}
+                    <tr>
+                        <td><a href="{{ url_for('event', eventid=row.eventid) }}">{{ row.name }}</a></td>
+                        <td>{{ row.jname }}</td>
+                        <td>{% if row.appliedtime is not none %} {{ row.appliedtime }} {% endif %}</td>
+                        <td>{{ row.startdate }}</td>
+                        <td>
+                          {% if row.state is not none %} {{ row.state }} {% endif %}
+                          {% if row.country is not none %} {{ row.country }} {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="hosted-events" class="container tab-pane fade"><br>
+          <div>
+            <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Event</th>
+                      <th>Race</th>
+                      <th>Date</th>
+                      <th>Location</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for row in hosted_events %}
+                  <tr>
+                      <td><a href="{{ url_for('event', eventid=row.eventid) }}">{{ row.name }}</a></td>
+                      <td>{% if row.rname is not none %} {{ row.rname }} {% endif %}</td>
+                      <td>{{ row.startdate }}</td>
+                      <td>
+                        {% if row.state is not none %} {{ row.state }} {% endif %}
+                        {% if row.country is not none %} {{ row.country }} {% endif %}
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</article>
+{% endblock content %}

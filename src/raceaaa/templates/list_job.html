@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+  <div class="media-body" style="word-break: break-word;">
+    <div class="article-metadata">
+      <div class="media">
+        <img class="rounded event-img" src="{{ logo_file }}">
+        <div class="media-body">
+          <h2 class="account-heading">
+              <a class="article-title" href="{{ url_for('event', eventid=event.eventid) }}">{{ event.name }}</a>
+              <div class="pull-right">
+                  {{ event.startdate.year }}
+              </div>
+          </h2>
+          <div class="text-secondary pull-left" style="width: 50%;">
+            Start: {{ event.startdate }}<br>
+            Registration: {{ event.regopendate }}<br>
+            Location: 
+                {% if event.state is not none %} {{ event.state }} {% endif %}
+                {% if event.country is not none %} {{ event.country }} {% endif %}
+          </div>
+          <div class="text-secondary">
+            Races:<br>
+            Status:<br>
+            Organization: {% if event.organization is not none %} {{ event.organization }} {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <legend class="border-bottom mb-4">Volunteering Info</legend>
+
+      <div id="accordion">
+        {% for job in jobs %}
+        <div class="card">
+          <div class="card-header bg-secondary">
+            <a class="collapsed card-link text-white btn-block" data-toggle="collapse" href="#jobid-{{ job.jobrequestid }}">
+              <div class="pull-left" style="width: 90%;">{{ job.name }}</div>
+              {% if job.applied %}
+              <div class="pull-right text-right" style="width: 10%"><i class="fas fa-hands-helping"></i></div>
+              {% else %}
+              <div class="pull-right text-right" style="width: 10%">{{ job.available }}</div>
+              {% endif %}
+            </a>
+          </div>
+          <div id="jobid-{{ job.jobrequestid }}" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="text-body pull-left" style="margin-bottom: 20px;">
+                  Title: {{ job.title }} <br>
+                  Available: {{ job.available }} <br>
+                  Detail: {{ job.detail }} <br>
+                  Description: {{ job.description }}
+              </div>
+              <div class="btn-group pull-right" style="margin-bottom: 20px;">
+                {% if race_director: %}
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Race Director</button>
+                  <div class="dropdown-menu raceaaa-menu">
+                    <a class="dropdown-item" href="{{ url_for('update_job', eventid=event.eventid, jobrequestid=job.jobrequestid) }}">Job Update</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete-{{ job.jobrequestid }}">Job Delete</a>
+                  </div>
+                {% else %}
+                  {% if job.applied %}
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#drop-{{ job.jobrequestid }}">Drop</button>
+                  {% else %}
+                    {% if job.available > 0 %}
+                      <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#apply-{{ job.jobrequestid }}">Apply</button>
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Job Modal -->
+        <div class="modal fade" id="delete-{{ job.jobrequestid }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Job?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('delete_job', eventid=event.eventid, jobrequestid=job.jobrequestid) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apply Job Modal -->
+        <div class="modal fade" id="apply-{{ job.jobrequestid }}" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="applyModalLabel">Apply Job?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('apply_job', eventid=event.eventid, jobrequestid=job.jobrequestid) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Apply">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drop Job Modal -->
+        <div class="modal fade" id="drop-{{ job.jobrequestid }}" tabindex="-1" role="dialog" aria-labelledby="dropModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="dropModalLabel">Drop Job?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('drop_job', eventid=event.eventid, jobrequestid=job.jobrequestid) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Drop">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</article>
+
+{% endblock content %}

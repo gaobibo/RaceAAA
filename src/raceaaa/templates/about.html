@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div>
+
+        <div class="card" style="margin-left:10px; margin-top:10px; width:300px; height: 450px;">
+            <img class="card-img-top" src="{{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='profile_pics/') }}bibo_pic_about.jpg" style="width:100%">
+        </div>
+
+        <div class="container-fluid bg-light" style="margin-top:10px;">
+            <h5>Bibo Gao - Ultramarathon Runner</h5>
+            <p>
+                In marathon or ultra-marathon, there are always some moments we refuse to give up, but our body refuses to go on. 
+                Sometimes I got chafing on the inner thighs, sometimes I found my stomach upset, and began vomiting, sometimes I got a rolled ankle, sometimes I was under the risk of hypothermia. 
+                Blisters and black or missing toenails are something like a fashion statement and a badge of honor. I know it’s useless to complain at those moments. 
+                Give up on giving up and you will always find a way. All I could do is keep placing one foot in front of the other like a robot. 
+                Learning how to deal with things for which you don't prepare is a part of the challenge and fun, that you gained from a marathon or an ultra-marathon. 
+                Embracing the unexpected is one of things that make running so intriguing and so rewarding. Remember to look up at the star, not down at your feet. If you are going through hell, keep going. 
+                That is what my running belief is all about.
+            </p>
+        </div>
+
+    </div>
+
+{% endblock content %}

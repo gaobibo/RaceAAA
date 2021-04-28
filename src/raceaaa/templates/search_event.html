@@ -1,0 +1,335 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Search Event</h5>
+
+            <div class="input-group mb-3">
+                <input id="ei1" type="text" class="form-control" placeholder="" autocomplete="off">
+                <div class="input-group-append">
+                    <button id="search-event-button" onclick="GetResults()" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+
+            <h5>Filter Result</h5><hr>
+            <div>
+                <h5>Timeline</h5>
+                <div class="form-check ml-5">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" id="et1" onclick="GetResults()" autocomplete="off"/> Include Past Events
+                    </label>
+                </div>
+
+                <h5>Registration</h5>
+                <div class="form-check ml-5">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" id="er1" onclick="GetResults()" autocomplete="off"/> Registration Open
+                    </label>
+                </div>
+
+                <h5>Month</h5>
+                <div class="row ml-5">
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em1" onclick="GetResults()" autocomplete="off"/> January
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em2" onclick="GetResults()" autocomplete="off"/> February
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em3" onclick="GetResults()" autocomplete="off"/> March
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em4" onclick="GetResults()" autocomplete="off"/> April
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em5" onclick="GetResults()" autocomplete="off"/> May
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em6" onclick="GetResults()" autocomplete="off"/> June
+                        </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em7" onclick="GetResults()" autocomplete="off"/> July
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em8" onclick="GetResults()" autocomplete="off"/> August
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em9" onclick="GetResults()" autocomplete="off"/> September
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em10" onclick="GetResults()" autocomplete="off"/> October
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em11" onclick="GetResults()" autocomplete="off"/> November
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="em12" onclick="GetResults()" autocomplete="off"/> December
+                        </label>
+                    </div>
+                </div>
+                </div>
+
+                <h5>Distance</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="eds1" onclick="GetResults()" autocomplete="off"/> Up to 10 Miles
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="eds2" onclick="GetResults()" autocomplete="off"/> 11-30 Miles
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="eds3" onclick="GetResults()" autocomplete="off"/> 31-50 Miles
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="eds4" onclick="GetResults()" autocomplete="off"/> 51-110 Miles
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="eds5" onclick="GetResults()" autocomplete="off"/> More Than 110 Miles
+                        </label>
+                    </div>
+                </div>
+
+                <h5>Duration</h5>
+                <div class="ml-5">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="edr1" onclick="GetResults()" autocomplete="off"/> Up to 12 Hours
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="edr2" onclick="GetResults()" autocomplete="off"/> 13-24 Hours
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="edr3" onclick="GetResults()" autocomplete="off"/> 25-72 Hours
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" id="edr4" onclick="GetResults()" autocomplete="off"/> More Than 72 Hours
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8" id="event_list">
+            {% for event in outString %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <div class="media">
+                            <img class="rounded event-img" src="{{ config['CLOUD_STORAGE_URL'] + url_for('static', filename='event_pics/' + event.logo) }}">
+                            <div class="media-body">
+                                <h2 class="account-heading">
+                                    <a class="article-title" href="{{ url_for('event', eventid=event.eventid) }}">{{ event.name }}</a>
+                                    <div class="pull-right">
+                                        {{ event.startdate.year }}
+                                    </div>
+                                </h2>
+                                <div class="text-secondary pull-left" style="width: 50%;">
+                                    Start: {{ event.startdate }}<br>
+                                    Registration: {{ event.regopendate }}<br>
+                                    Location: 
+                                        {% if event.state is not none %} {{ event.state }} {% endif %}
+                                        {% if event.country is not none %} {{ event.country }} {% endif %}
+                                </div>
+                                <div class="text-secondary">
+                                    Races: {% if event.racelist is not none %} {{ event.racelist }} {% endif %}<br>
+                                    Status:<br>
+                                    Organization: {% if event.organization is not none %} {{ event.organization }} {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    var ei1 = document.getElementById('ei1');
+    var et1 = document.getElementById("et1");
+    var er1 = document.getElementById("er1");
+    var em1 = document.getElementById("em1");
+    var em2 = document.getElementById("em2");
+    var em3 = document.getElementById("em3");
+    var em4 = document.getElementById("em4");
+    var em5 = document.getElementById("em5");
+    var em6 = document.getElementById("em6");
+    var em7 = document.getElementById("em7");
+    var em8 = document.getElementById("em8");
+    var em9 = document.getElementById("em9");
+    var em10 = document.getElementById("em10");
+    var em11 = document.getElementById("em11");
+    var em12 = document.getElementById("em12");
+    var eds1 = document.getElementById("eds1");
+    var eds2 = document.getElementById("eds2");
+    var eds3 = document.getElementById("eds3");
+    var eds4 = document.getElementById("eds4");
+    var eds5 = document.getElementById("eds5");
+    var edr1 = document.getElementById("edr1");
+    var edr2 = document.getElementById("edr2");
+    var edr3 = document.getElementById("edr3");
+    var edr4 = document.getElementById("edr4");
+
+    var queryDict = {};
+    location.search.substr(1).split("&").forEach(function(item){queryDict[item.split("=")[0]]=item.split("=")[1]});
+
+    ei1.value = queryDict.name ? decodeURIComponent(queryDict.name) : '';
+    if (queryDict.focus == 1) ei1.focus();
+    et1.checked = queryDict.past & 1 ? true : false;
+    er1.checked = queryDict.open & 1 ? true : false;
+    em1.checked = queryDict.mont & 0x0001 ? true : false;
+    em2.checked = queryDict.mont & 0x0002 ? true : false;
+    em3.checked = queryDict.mont & 0x0004 ? true : false;
+    em4.checked = queryDict.mont & 0x0008 ? true : false;
+    em5.checked = queryDict.mont & 0x0010 ? true : false;
+    em6.checked = queryDict.mont & 0x0020 ? true : false;
+    em7.checked = queryDict.mont & 0x0040 ? true : false;
+    em8.checked = queryDict.mont & 0x0080 ? true : false;
+    em9.checked  = queryDict.mont & 0x0100 ? true : false;
+    em10.checked = queryDict.mont & 0x0200 ? true : false;
+    em11.checked = queryDict.mont & 0x0400 ? true : false;
+    em12.checked = queryDict.mont & 0x0800 ? true : false;
+    eds1.checked = queryDict.dist & 0x0001 ? true : false;
+    eds2.checked = queryDict.dist & 0x0002 ? true : false;
+    eds3.checked = queryDict.dist & 0x0004 ? true : false;
+    eds4.checked = queryDict.dist & 0x0008 ? true : false;
+    eds5.checked = queryDict.dist & 0x0010 ? true : false;
+    edr1.checked = queryDict.dura & 0x0001 ? true : false;
+    edr2.checked = queryDict.dura & 0x0002 ? true : false;
+    edr3.checked = queryDict.dura & 0x0004 ? true : false;
+    edr4.checked = queryDict.dura & 0x0008 ? true : false;
+
+    var focus = false;
+    ei1.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            focus = true;
+            document.getElementById('search-event-button').click();
+        }
+    });
+
+    function GetResults() {
+        var past = 0;
+        var open = 0;
+        var mont = 0;
+        var dist = 0;
+        var dura = 0;
+
+        if (et1.checked) past |= 0x0001;
+        if (er1.checked) open |= 0x0001;
+        if (em1.checked) mont |= 0x0001;
+        if (em2.checked) mont |= 0x0002;
+        if (em3.checked) mont |= 0x0004;
+        if (em4.checked) mont |= 0x0008;
+        if (em5.checked) mont |= 0x0010;
+        if (em6.checked) mont |= 0x0020;
+        if (em7.checked) mont |= 0x0040;
+        if (em8.checked) mont |= 0x0080;
+        if (em9.checked)  mont |= 0x0100;
+        if (em10.checked) mont |= 0x0200;
+        if (em11.checked) mont |= 0x0400;
+        if (em12.checked) mont |= 0x0800;
+        if (eds1.checked) dist |= 0x0001;
+        if (eds2.checked) dist |= 0x0002;
+        if (eds3.checked) dist |= 0x0004;
+        if (eds4.checked) dist |= 0x0008;
+        if (eds5.checked) dist |= 0x0010;
+        if (edr1.checked) dura |= 0x0001;
+        if (edr2.checked) dura |= 0x0002;
+        if (edr3.checked) dura |= 0x0004;
+        if (edr4.checked) dura |= 0x0008;
+
+        url = '/search_event?';
+        url += 'name=' + encodeURIComponent(ei1.value);
+        if (focus) url += '&focus=1';
+        if (past > 0) url += '&past=' + past;
+        if (open > 0) url += '&open=' + open;
+        if (mont > 0) url += '&mont=' + mont;
+        if (dist > 0) url += '&dist=' + dist;
+        if (dura > 0) url += '&dura=' + dura;
+
+        window.location.assign(url);
+    }
+
+    function GetNameResults() {
+        url = '/search_event/';
+        url += encodeURIComponent(ei1.value);
+        
+        fetch(url).then(function(response) {
+            response.json().then(function(data) {
+                let eventHTML = '';
+                for (let event of data.events) {
+                    eventHTML += '<article class="media content-section">' +
+                                    '<div class="media-body">' +
+                                    '<div class="media">' +
+                                    '<img class="rounded event-img" src="static/event_pics/' + event.logo + '">' +
+                                    '<div class="media-body">' +
+                                    '<h2 class="account-heading">' +
+                                        '<a class="article-title" href="event/' + event.eventid + '">' + event.name + '</a>' +
+                                        '<div class="pull-right">' + event.year + '</div>' +
+                                    '</h2>' +
+                                    '<div class="text-secondary pull-left" style="width: 50%;">' +
+                                        'Start: ' + event.startdate + '<br>' +
+                                        'Registration: ' + event.regopendate + '<br>' +
+                                        'Location: ' + event.location +
+                                    '</div>' +
+                                    '<div class="text-secondary">' +
+                                        'Races: ' + '<br>' +
+                                        'Status: ' + '<br>' +
+                                        'Organization: ' + event.organization +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</article>';                
+                }
+                let event_list = document.getElementById('event_list');
+                event_list.innerHTML = eventHTML;
+            });
+        });
+    }
+</script>
+
+{% endblock content %}
